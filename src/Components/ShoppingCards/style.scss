@@ -1,0 +1,39 @@
+.cards-container{
+    .cards-columns{
+        float: left;
+        width: 25%;
+        height: 250px;
+        min-width: 100px;
+        .shopping-cards{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            margin: 5px;
+            align-items: center;
+            background: #C4C4C4;
+            img{
+                width: 85%;
+                height: 150px;
+                object-fit: cover;
+            }
+            span{
+                font-size: 14px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
+            }
+        }
+    }
+
+    &::after{
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+    .pagination-end{
+        display: inline-flex;
+        margin: 30px 0;
+    }
+}

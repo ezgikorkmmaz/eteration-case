@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./style.scss";
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
@@ -43,8 +43,6 @@ const FilterCards = ({products, setFilteredProducts}) => {
                 type="text"
                 placeholder="Search"
                 prefix={<SearchOutlined />}
-                //    onChange={handleChange}
-                //    value={searchInput} 
             />
             {brandsList.map((elem, index) => (
                     <div className="sort-by-list" key={index}>
@@ -60,8 +58,6 @@ const FilterCards = ({products, setFilteredProducts}) => {
                 type="text"
                 placeholder="Search"
                 prefix={<SearchOutlined />}
-                //    onChange={handleChange}
-                //    value={searchInput} 
             />
             {modelList.map((elem, index) => (
                     <div className="sort-by-list" key={index}>

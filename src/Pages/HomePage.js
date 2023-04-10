@@ -4,9 +4,10 @@ import Filter from '../Components/Filter';
 import ShoppingCards from '../Components/ShoppingCards';
 import './style.scss';
 
-const HomePage = () => {
+const HomePage = ({searchInput}) => {
   const [products, setProducts] = useState();
   const [filteredProducts, setFilteredProducts] = useState();
+  const [searchParam] = useState(["name"]);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -18,10 +19,24 @@ const HomePage = () => {
       };
       dataFetch();
 }, []);
+  
+useEffect(() => {
+  const filteredData = products.filter((item) => {
+    return searchParam.some((newItem) => {
+        return (
+            item[newItem]
+                .toString()
+                .toLowerCase()
+                .indexOf(searchInput.toLowerCase()) > -1
+        );
+    });
+});
+  setFilteredProducts(filteredData);
+}, [searchInput, searchParam, products]);
 
   return (
       <div className="menu-container">
-      <Filter products={products} setFilteredProducts={setFilteredProducts} />
+      <Filter products={filteredProducts} setFilteredProducts={setFilteredProducts} />
       <ShoppingCards products={filteredProducts} />
       <Checkout />
       </div>

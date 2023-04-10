@@ -3,7 +3,7 @@ import { SearchOutlined, ShoppingOutlined, UserOutlined } from '@ant-design/icon
 import { Input } from 'antd';
 import "./style.scss";
 
-const Header = () => {
+const Header = ({setSearchInput}) => {
     return (
         <div className="header">
             <span className='title'>Eteration</span>
@@ -12,8 +12,7 @@ const Header = () => {
                 type="text"
                 placeholder="Search"
                 prefix={<SearchOutlined />}
-                //    onChange={handleChange}
-                //    value={searchInput} 
+                onChange={(e) => setSearchInput(e.target.value)}
             />
             <div className='account-info'>
             <ShoppingOutlined />   

@@ -20,8 +20,8 @@ const Pagination = ({nPages, currentPage, setCurrentPage}) => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
             </button>
-            {pageNumbers?.map((num) => (
-            <div className="page-numbers">
+            {pageNumbers && pageNumbers?.map((num) => (
+            <div key={num} className="page-numbers">
                 <button key={num} className={`btn-page ${currentPage === num && 'btn-selected'}`}>{num}</button>
             </div>
             ))}

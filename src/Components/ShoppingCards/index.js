@@ -1,46 +1,54 @@
 import React, {useState, useEffect} from 'react';
 import "./style.scss";
 import Pagination from '../Pagination/Pagination';
+import { useNavigate } from "react-router-dom";
 
-const ShoppingCards = () => {
-    const [products, setProducts] = useState();
-    const [loading, setLoading] = useState(true);
+const ShoppingCards = ({products}) => {
+    const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12);
-
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
     const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
-    const nPages = Math.ceil(products?.length / productsPerPage)
+    const nPages = Math.ceil(products?.length / productsPerPage);
 
-    useEffect(() => {
-        const dataFetch = async () => {
-            const data = await (
-              await fetch(' https://5fc9346b2af77700165ae514.mockapi.io/products')
-            ).json();
-            setProducts(data);
-            setLoading(false);
-          };
-      
-          dataFetch();
-        // fetch(' https://5fc9346b2af77700165ae514.mockapi.io/products')
-        //     .then(response => response.json())
-        //     .then(data => setProducts(data));
-            
-    }, []);
+    const changeRoute = (product) =>{ 
+        navigate(`/product/${product.id}`, { state: {product} });
+    }
+
+    const [cart, setCart] = useState([]);
+    const handleAddProduct = (product) => {
+        const newArr = JSON.parse(localStorage.getItem("products") || "[]");
+        const ProductExist = cart.find(item => item.id === product.id);
+        if (ProductExist) {
+            setCart(
+                cart.map(item =>
+              item.id === product.id
+                ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+                : item
+            )
+          )
+        } else {
+            setCart([...cart, { 
+            ...product, 
+            quantity: 1 
+          }])
+        }
+        localStorage.setItem("products", JSON.stringify(cart));
+      };
 
     return (
-        <>
-        {!loading && (
         <div className="cards-container"> 
         {currentProducts?.map((prod) => 
-            <div className="cards-columns">
+            <div key={prod.id} className="cards-columns">
                 <div className="shopping-cards">
-                    <img src={prod.image} alt=""/>
-                    <span>{prod.price}</span>
-                    <span>{prod.name}</span>
-                    <button>Add to Cart</button>
+                    <img onClick={() => changeRoute(prod)} src={prod.image} alt=""/>
+                    <div className='product-info'>
+                        <span className='prod-price'>{prod.price}₺</span>
+                        <span>{prod.name}</span>
+                    </div>
+                    <button onClick={() => handleAddProduct(prod)} className='checkout-btn'>Add to Cart</button>
                 </div>
             </div>
             )}
@@ -52,8 +60,6 @@ const ShoppingCards = () => {
             />
             </div>
         </div>
-        )}
-        </>
     );
 };
 

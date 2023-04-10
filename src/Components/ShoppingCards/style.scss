@@ -2,28 +2,50 @@
     .cards-columns{
         float: left;
         width: 25%;
-        height: 250px;
-        min-width: 100px;
+        height: 100%;
         .shopping-cards{
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding: 5px;
             margin: 5px;
-            align-items: center;
-            background: #C4C4C4;
+            background: #fff;
+            cursor: pointer;
             img{
-                width: 85%;
+                width: 95%;
                 height: 150px;
                 object-fit: cover;
+                align-self: center;
             }
             span{
                 font-size: 14px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                width: 100%;
+                width: 100%; 
+                font-weight: 500;
+            }
+            .product-info{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                text-align: left;
+                height: 50px;
+                margin: 15px 5px;
+                .prod-price{
+                    color: #2a59fe;
+                }
+            }
+            .checkout-btn{
+                background: #2A59FE;
+                color: #fff;
+                border-radius: 4px;
+                border: none;
+                height: 32px;
+                margin: 0 5px 5px 5px;
+                cursor: pointer;
             }
         }
+            
     }
 
     &::after{

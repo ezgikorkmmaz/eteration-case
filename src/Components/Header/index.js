@@ -1,13 +1,26 @@
 import React from 'react';
-import { UserOutlined } from '@ant-design/icons';
+import { SearchOutlined, ShoppingOutlined, UserOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import "./style.scss";
 
 const Header = () => {
     return (
         <div className="header">
-            <span>Eteration</span>
-            <span>117.00</span>
+            <span className='title'>Eteration</span>
+            <Input
+                className="search-bar"
+                type="text"
+                placeholder="Search"
+                prefix={<SearchOutlined />}
+                //    onChange={handleChange}
+                //    value={searchInput} 
+            />
+            <div className='account-info'>
+            <ShoppingOutlined />   
+            <span className='card-info'>117.00</span>
+            <UserOutlined />
             <span>Kerem</span>
+            </div>
         </div>
     );
 };
